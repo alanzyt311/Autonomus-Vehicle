@@ -1,5 +1,5 @@
 # Autonomus Vehicle
-This is an autonomus vehicle projects done with Python and ROS.
+This is an autonomus vehicle projects done with Python, ROS, and Polaris GEM e2 Vechicle.
 
 ## Details
 1. SOS Light Flashing (Done)
