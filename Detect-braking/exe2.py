@@ -14,9 +14,6 @@ class Detector:
     def pedestrian_exists(self, image):
         # resize image
         image = imutils.resize(image, width=min(400, image.shape[1]))
-        # 其中窗口步长与Scale对结果影响最大，特别是Scale，
-        # 小的尺度变化有利于检出低分辨率对象，同时也会导致FP发生，
-        # 高的可以避免FP但是会产生FN（对象漏检）。
         # "detectMultiScale" Ref: https://pyimagesearch.com/2015/11/16/hog-detectmultiscale-parameters-explained/
         rects, weights = self.hog.detectMultiScale(
             image, winStride=(4, 4),
@@ -34,6 +31,7 @@ class Detector:
 # Ref: http://wiki.ros.org/cv_bridge/Tutorials/ConvertingBetweenROSImagesAndOpenCVImagesPython
 class Manager:
     def __init__(self):
+    	
         self.bridge = CvBridge()
         self.detector = Detector()
         # Ref: https://github.com/astuff/pacmod
@@ -44,18 +42,21 @@ class Manager:
 
     def callback(self, image):
         try:
+        	print("running")
             cv_image = self.bridge.imgmsg_to_cv2(image, "bgr8")
             exists = self.detector.pedestrian_exists(cv_image)
             if exists:
                 print("Pedestrian detected, braking")
-                self.brake_pub.publish(f64_cmd=0.5, enable=True)
+                self.brake_pub.publish(f64_cmd=0.15, enable=True)
             else:
-                self.forward_pub(f64_cmd=0.3, enable=True)
+                self.forward_pub(f64_cmd=0.15, enable=True)
         except CvBridgeError as e:
             print(e)
 
 
 if __name__=="__main__":
+    print("..")
     rospy.init_node("manager_node")
     m = Manager()
+    
 
