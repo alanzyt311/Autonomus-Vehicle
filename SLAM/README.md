@@ -1,47 +1,20 @@
-# Challenge 3: SLAM or Odometry
+# Task Description
+Either use an existing visual slam package or an existing visual odometry package to recover a representation of vehicle movement in the back lot.
 
-Either use an existing visual slam package or an existing visual odometry package to recover a representation of vehicle movement in the back lot (this is challenging!).
-
-## Usage
-
-We used the [hector slam package](http://wiki.ros.org/hector_slam/Tutorials/MappingUsingLoggedData). You can install it with
-
-```
-sudo apt-get install ros-indigo-hector-slam
-```
-
-or you can directly clone the github repository
-
+# Usage
+We used the hector slam package. You can install it with:
 ```
 git clone https://github.com/tu-darmstadt-ros-pkg/hector_slam.git
 ```
+Then compile it with `catkin_make`.
 
-Then compile it in your workspace with `catkin_make`
-
-Open two terminals. In the first terminal, launch hector slam
-
+Open the 1st terminal, launch hector slam.
 ```
 source devel/setup.bash
 roslaunch hector_slam_launch tutorial.launch
 ```
-
-In the second terminal, play the prerecorded rosbag
-
+Open the 2nd terminal, play the prerecorded rosbag. (We used the data bag provided by TA, you can download it [here](https://uofi.app.box.com/s/gw38m6rz45c90qd5qikpccl55c6lk6z8))
 ```
-rosbag play data.bag /lidar1/scan:=/scan --clock -r 1.8
+source devel/setup.bash
+rosbag play SampleRun_2022-10-31.bag /lidar1/scan:=/scan --clock -r 1.8
 ```
-
-To record your own rosbag, launch basic sensor in one terminal
-
-```
-roslaunch basic_launch gnss_sensor_init.launch
-```
-
-and record rosbag in another terminal with
-
-```
-rosbag record -O data.bag /SELECTED/TOPICS (/lidar1/scan, etc.)
-```
-
-## Demo
-

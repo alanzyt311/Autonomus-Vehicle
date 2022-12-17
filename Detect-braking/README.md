@@ -1,27 +1,23 @@
-# Challenge 2: Detecting and Braking
+# Task Description
+Cause the vehicle to brake after detecting a person (answers in teams of no more than five.
 
-Cause the vehicle to brake after detecting a person (answers in teams of no more than five, due early Nov; can be done!
-
-## Usage
-
-Open three terminals. In the first terminal, launch the joystick controller
-
+# Steps
+## Step 1
+Open the 1st terminal, launch the joystick controller
 ```
 source devel/setup.bash
-roslaunch basic_launch dbw_joystick.launch
+roslaunch basic_launch gem_dbw_joystick.launch
 ```
+# Step 2
 
-In the second terminal, launch the basic sensors
-
+Open the 2nd terminal, launch the basic sensors
 ```
 source devel/setup.bash
-roslaunch basic_launch gnss_sensor_init.launch
+roslaunch basic_launch gem_sensor_init.launch
 ```
 
-In the third terminal, directly run `brake.py`
-
+# Step 3
 ```
-python brake.py
+source devel/setup.bash
+rosrun [PackageName] brake.py
 ```
-
-## Demo
